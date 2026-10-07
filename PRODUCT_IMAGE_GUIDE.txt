@@ -1,0 +1,104 @@
+SIOMAI HOUSE POS - PRODUCT NAME / IMAGE GUIDE
+
+1) WHERE THE PRODUCT NAME IS USED IN REACT
+
+POS page:
+src/pages/POS.jsx
+
+The product name is NOT hard-coded in the product cards. It comes from the API/database:
+
+    {product.product_name}
+
+The image is loaded using:
+
+    IMAGE_URL + product.image
+
+API/base image URL:
+src/api.js
+
+    export const IMAGE_URL = `${API_BASE}/backend/images/`;
+
+2) WHERE THE PRODUCT NAME COMES FROM
+
+Backend API:
+backend/api/products/index.php
+
+It selects:
+    product_name
+    category
+    price
+    stock
+    status
+    image
+
+The actual values are stored in MySQL/phpMyAdmin in:
+
+    database: siomai_house
+    table: products
+
+Important columns:
+    product_name  = name displayed in POS
+    image         = image filename, e.g. it_1.jpg
+
+3) WHERE THE PRODUCT IMAGES ARE
+
+Backend image folder:
+backend/images/
+
+Full XAMPP location after extraction:
+C:\xampp\htdocs\siomai-house-pos\backend\images\
+
+Files:
+    it_1.jpg
+    it_2.jpg
+    it_3.jpg
+    it_4.jpg
+    it_5.jpg
+    it_6.jpg
+    it_7.jpg
+    it_8.jpg
+    it_9.jpg
+
+4) IMAGE FILE MAPPING IN THE PROVIDED PROJECT
+
+    it_1.jpg = Pork Siomai
+    it_2.jpg = Chicken Siomai
+    it_3.jpg = Beef Siomai
+    it_4.jpg = Lumpia
+    it_5.jpg = Siomai Rice
+    it_6.jpg = Buchi
+    it_7.jpg = Halo-Halo
+    it_8.jpg = Iced Drinks
+    it_9.jpg = Siomai House Combo
+
+These labels are also printed inside the image files.
+
+5) WHERE TO CHANGE A PRODUCT NAME
+
+Recommended: phpMyAdmin -> siomai_house -> products -> Edit
+
+Example:
+    product_name = Pork Siomai
+    image = it_1.jpg
+
+If you change only product_name, the same image will still be used.
+If you change image to it_4.jpg, that product will display the Lumpia image.
+
+6) WHERE TO CHANGE THE IMAGE FOR A PRODUCT
+
+Edit the image value in the products table.
+
+Example:
+    image = it_1.jpg
+
+Or replace the actual file in:
+    C:\xampp\htdocs\siomai-house-pos\backend\images\it_1.jpg
+
+7) WHY THE OLD INTERFACE LOOKED BLURRY
+
+The supplied product images are approximately 130x129 pixels. The old CSS stretched each image to the full product-card width and height, which enlarged the small image.
+
+The CSS was changed in:
+    src/index.css
+
+The product image now keeps its natural size (up to the available card space) instead of stretching a 130x129 image across the whole card.

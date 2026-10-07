@@ -1,0 +1,5 @@
+Save your logo in this folder with the exact name:  logo.png
+(square, transparent background looks best, about 256 x 256 pixels or larger)
+
+It shows on the Login page, the Register page and the sidebar of every page,
+including the POS. Until the file exists, the letters "SH" are shown instead.
