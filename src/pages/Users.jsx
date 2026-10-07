@@ -620,7 +620,7 @@ function Users() {
                                 placeholder={
                                     form.id
                                         ? "Leave blank to keep the current password"
-                                        : "At least 6 characters"
+                                        : "At least 8 characters"
                                 }
                                 value={form.password}
                                 onChange={updateField("password")}

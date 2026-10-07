@@ -1,20 +1,17 @@
-// Central API configuration for both PC and Android/LAN use.
+// One place for the backend address.
 //
-// When the React app is opened on your PC:
-//   http://localhost:5173
-// the API automatically uses:
-//   http://localhost/siomai-house-pos
-//
-// When the React app is opened from an Android phone on the same Wi-Fi:
-//   http://192.168.x.x:5173
-// the API automatically uses the same PC IP:
-//   http://192.168.x.x/siomai-house-pos
-//
-// You can still override this with VITE_API_BASE in a .env file.
-const browserHost = typeof window !== "undefined" ? window.location.hostname : "localhost";
+//  - On your computer (npm run dev): http://localhost/siomai-house-pos
+//  - On the live site (Vercel): empty, so requests go to this same website at
+//    /backend/..., and vercel.json forwards them to your PHP host.
+//  - Override anytime with VITE_API_BASE (see .env.example).
+const configured = import.meta.env.VITE_API_BASE;
 
 export const API_BASE =
-    import.meta.env.VITE_API_BASE || `http://${browserHost}/siomai-house-pos`;
+    configured !== undefined
+        ? String(configured).replace(/\/$/, "")
+        : import.meta.env.PROD
+            ? ""
+            : "http://localhost/siomai-house-pos";
 
 export const API = `${API_BASE}/backend/api`;
 export const IMAGE_URL = `${API_BASE}/backend/images/`;
@@ -51,6 +48,7 @@ export async function logoutUser(navigate) {
 
 // Admin, Owner, Cashier and Staff see everything.
 // Any other role (Client / buyer) only gets the POS.
+// Decided by role NAME, so it works whatever ID each role has in your database.
 const STAFF_ROLES = ["admin", "owner", "cashier", "staff"];
 
 export function getStoredUser() {

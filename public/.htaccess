@@ -1,0 +1,23 @@
+# Siomai House POS - for hosting the website AND the backend on one Apache host (e.g. InfinityFree)
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+<FilesMatch "\.(sql|md|log|env|ini|bak)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # never rewrite the backend
+    RewriteRule ^(backend|config|database)/ - [L]
+
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>

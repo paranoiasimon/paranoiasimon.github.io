@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { API, apiFetch } from "../api";
 
@@ -43,8 +42,6 @@ const emptyFilters = {
 
 
 function Orders() {
-
-    const navigate = useNavigate();
 
     const user = JSON.parse(
         localStorage.getItem("siomai_user") || "null"

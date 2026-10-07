@@ -4,8 +4,7 @@ import { getStoredUser, isAdminUser, isStaffUser, logoutUser } from "../api";
 
 function Sidebar({
     active,
-    user,
-    onLogout
+    user
 }) {
 
     const navigate = useNavigate();

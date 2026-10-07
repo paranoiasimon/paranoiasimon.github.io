@@ -52,7 +52,7 @@ function Login() {
 
                 result = JSON.parse(rawResponse);
 
-            } catch (error) {
+            } catch {
 
                 console.error(
                     "PHP returned invalid JSON:",

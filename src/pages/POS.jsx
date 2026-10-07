@@ -15,10 +15,6 @@ function POS() {
     const [category, setCategory] = useState("All");
     const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        loadProducts();
-    }, []);
-
     const loadProducts = async () => {
         try {
             setLoading(true);
@@ -38,6 +34,10 @@ function POS() {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        loadProducts();
+    }, []);
 
     const addToCart = (product) => {
         if (Number(product.stock) <= 0) {
